@@ -1,0 +1,41 @@
+query getRepositories($login: String!, $repositoriesFirst: Int!, $repositoriesAfter: String, $refsFirst: Int!) {
+  rateLimit {
+    cost
+    limit
+    nodeCount
+    remaining
+    resetAt
+    used
+  }
+  user(login: $login) {
+    repositories(
+      isFork: false
+      orderBy: {field: CREATED_AT, direction: DESC}
+      first: $repositoriesFirst
+      after: $repositoriesAfter
+    ) {
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+      nodes {
+        name
+        owner {
+          login
+        }
+        refs(refPrefix: "refs/heads/", first: $refsFirst) {
+          pageInfo {
+            endCursor
+            hasNextPage
+          }
+          nodes {
+            name
+            target {
+              oid
+            }
+          }
+        }
+      }
+    }
+  }
+}

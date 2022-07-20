@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2022",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"]
+    },
+    "outDir": "dist",
+    "incremental": true
+  }
+}

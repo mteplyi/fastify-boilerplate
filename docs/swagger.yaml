@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: fastify-boilerplate swagger
+  description: |
+    ### Global Response Headers
+    ```
+       - X-Request-ID - the ID of the tracing forest
+    ```
+  version: 0.0.0
+components:
+  schemas: {}
+paths:
+  /healthcheck:
+    get:
+      tags:
+        - Common
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 200
+                  Message:
+                    type: string
+                    enum:
+                      - OK
+                required:
+                  - status
+                additionalProperties: false
+  /api/v1/repositories:
+    get:
+      tags:
+        - Repositories
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: login
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    ownerLogin:
+                      type: string
+                    branches:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          lastCommitOid:
+                            type: string
+                        required:
+                          - name
+                          - lastCommitOid
+                        additionalProperties: false
+                  required:
+                    - name
+                    - ownerLogin
+                    - branches
+                  additionalProperties: false
+tags:
+  - name: Common
+    description: Common endpoints
+  - name: Repositories
+    description: Repositories related endpoints
+externalDocs:
+  url: https://swagger.io
+  description: Find more info here

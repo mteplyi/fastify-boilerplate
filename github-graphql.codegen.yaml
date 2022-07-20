@@ -1,0 +1,16 @@
+overwrite: true
+schema: "node_modules/@octokit/graphql-schema/schema.json"
+documents: "src/sdk/github-graphql/**/*.graphql"
+generates:
+  src/sdk/github-graphql/sdk.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+      - "typescript-document-nodes"
+      - "typescript-operations"
+      - "typescript-graphql-request"
+    config:
+      rawRequest: true
+      skipTypename: true
+      useTypeImports: true
+      pureMagicComment: true

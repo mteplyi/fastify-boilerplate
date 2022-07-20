@@ -1,0 +1,24 @@
+query getRepositoryRefs($owner: String!, $name: String!, $refsFirst: Int!, $refsAfter: String) {
+  rateLimit {
+    cost
+    limit
+    nodeCount
+    remaining
+    resetAt
+    used
+  }
+  repository(owner: $owner, name: $name, followRenames: true) {
+    refs(refPrefix: "refs/heads/", first: $refsFirst, after: $refsAfter) {
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+      nodes {
+        name
+        target {
+          oid
+        }
+      }
+    }
+  }
+}
